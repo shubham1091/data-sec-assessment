@@ -28,7 +28,7 @@ function App() {
       title: 'Internet & Network Safety',
       description: 'How you connect to and use the internet, WiFi, and company networks safely',
       icon: Shield,
-      color: 'bg-blue-500',
+      color: 'bg-blue',
       questions: [
         { id: 1, text: 'Do you use the company VPN when working from home or public places?', weight: 10 },
         { id: 2, text: 'Do you avoid connecting to public WiFi for work activities?', weight: 8 },
@@ -45,7 +45,7 @@ function App() {
       title: 'Data & Information Safety',
       description: 'How you handle, store, and protect company and customer information',
       icon: Database,
-      color: 'bg-teal-500',
+      color: 'bg-teal',
       questions: [
         { id: 1, text: 'Do you store sensitive information only in approved company systems?', weight: 10 },
         { id: 2, text: 'Do you avoid saving work files on personal devices or cloud accounts?', weight: 10 },
@@ -62,7 +62,7 @@ function App() {
       title: 'Personal Security Habits',
       description: 'Your daily security practices, passwords, and awareness of threats',
       icon: Users,
-      color: 'bg-purple-500',
+      color: 'bg-accent-green',
       questions: [
         { id: 1, text: 'Do you use strong, unique passwords for all your work accounts?', weight: 9 },
         { id: 2, text: 'Can you identify suspicious emails and avoid clicking unknown links?', weight: 10 },
@@ -79,7 +79,7 @@ function App() {
       title: 'Workspace & Device Security',
       description: 'How you secure your physical workspace, devices, and office environment',
       icon: Building,
-      color: 'bg-orange-500',
+      color: 'bg-slate',
       questions: [
         { id: 1, text: 'Do you lock your computer screen when stepping away?', weight: 9 },
         { id: 2, text: 'Do you keep your work devices physically secure and not leave them unattended?', weight: 8 },
@@ -108,10 +108,10 @@ function App() {
 
   const getRiskColor = (riskLevel: string) => {
     switch (riskLevel) {
-      case 'low': return 'text-green-600';
-      case 'medium': return 'text-yellow-600';
-      case 'high': return 'text-orange-600';
-      default: return 'text-red-600';
+      case 'low': return 'text-accent-green';
+      case 'medium': return 'text-slate';
+      case 'high': return 'text-blue';
+      default: return 'text-dominant';
     }
   };
 
@@ -125,7 +125,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-light">
       <Header />
       
       {activeTab === 'assessments' && (
@@ -134,10 +134,10 @@ function App() {
           
           <section className="py-16 px-4 max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl font-bold text-dominant mb-4">
                 Security Assessment Categories
               </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              <p className="text-lg text-slate max-w-3xl mx-auto">
                 Complete these assessments to identify vulnerabilities and strengthen your cybersecurity posture
               </p>
             </div>
@@ -171,7 +171,7 @@ function App() {
       {activeTab === 'resources' && <ResourceCenter />}
 
       {/* Navigation Tabs */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-3">
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-light px-4 py-3">
         <div className="flex justify-center space-x-8">
           {[
             { id: 'assessments', label: 'Assessments', icon: Shield },
@@ -184,8 +184,8 @@ function App() {
               onClick={() => setActiveTab(id as 'assessments' | 'results' | 'compliance' | 'resources')}
               className={`flex flex-col items-center py-2 px-4 rounded-lg transition-colors ${
                 activeTab === id
-                  ? 'text-blue-600 bg-blue-50'
-                  : 'text-gray-600 hover:text-blue-600 hover:bg-gray-50'
+                  ? 'text-blue bg-blue-50'
+                  : 'text-slate hover:text-blue hover:bg-light'
               }`}
             >
               <Icon size={20} />

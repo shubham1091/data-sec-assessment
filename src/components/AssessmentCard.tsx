@@ -47,29 +47,29 @@ const AssessmentCard: React.FC<AssessmentCardProps> = ({
           )}
         </div>
         
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+        <h3 className="text-xl font-semibold text-dominant mb-2">
           {category.title}
         </h3>
         
-        <p className="text-gray-600 mb-4 leading-relaxed">
+        <p className="text-slate mb-4 leading-relaxed">
           {category.description}
         </p>
         
         {isCompleted && (
-          <div className="mb-4 p-3 bg-gray-50 rounded-lg">
+          <div className="mb-4 p-3 bg-light rounded-lg">
             <div className="flex items-center justify-between text-sm">
-              <span className="text-gray-600">Score:</span>
+              <span className="text-slate">Score:</span>
               <span className="font-semibold">
                 {result.score}/{result.maxScore} ({Math.round((result.score / result.maxScore) * 100)}%)
               </span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
+            <div className="w-full bg-light rounded-full h-2 mt-2">
               <div 
                 className={`h-2 rounded-full transition-all duration-500 ${
-                  result.riskLevel === 'low' ? 'bg-green-500' :
-                  result.riskLevel === 'medium' ? 'bg-yellow-500' :
-                  result.riskLevel === 'high' ? 'bg-orange-500' :
-                  'bg-red-500'
+                  result.riskLevel === 'low' ? 'bg-accent-green' :
+                  result.riskLevel === 'medium' ? 'bg-slate' :
+                  result.riskLevel === 'high' ? 'bg-blue' :
+                  'bg-dominant'
                 }`}
                 style={{ width: `${(result.score / result.maxScore) * 100}%` }}
               ></div>
@@ -78,13 +78,13 @@ const AssessmentCard: React.FC<AssessmentCardProps> = ({
         )}
         
         <div className="flex items-center justify-between">
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-slate">
             {category.questions.length} simple questions
           </span>
           
           <button
             onClick={onStartAssessment}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium"
+            className="flex items-center space-x-2 px-4 py-2 bg-blue hover:bg-blue-700 text-white rounded-lg transition-colors font-medium"
           >
             <Play size={16} />
             <span>{isCompleted ? 'Update' : 'Begin'}</span>

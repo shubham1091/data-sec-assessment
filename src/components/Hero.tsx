@@ -10,24 +10,24 @@ const Hero: React.FC = () => {
   ];
 
   return (
-    <section className="bg-gradient-to-br from-blue-50 via-white to-teal-50 py-20 px-4">
+    <section className="bg-gradient-to-br from-light via-white to-light py-20 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
+          <h1 className="text-5xl font-extrabold text-dominant mb-6 leading-tight">
             Comprehensive
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-600"> Cybersecurity </span>
+            <span className="bg-clip-text bg-gradient-to-r from-blue to-teal"> Cybersecurity </span>
             for Everyone
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
+          <p className="text-xl text-slate max-w-3xl mx-auto mb-8 leading-relaxed">
             Help keep our company secure! This quick assessment helps identify potential security risks 
             in your daily work. No technical expertise required - just answer honestly about your work habits.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <button className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            <button className="px-8 py-4 bg-blue hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
               Start My Assessment
             </button>
-            <button className="px-8 py-4 border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold rounded-lg transition-all duration-200">
+            <button className="px-8 py-4 border-2 border-blue text-blue hover:bg-light font-semibold rounded-lg transition-all duration-200">
               See Example Results
             </button>
           </div>
@@ -36,11 +36,11 @@ const Hero: React.FC = () => {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {stats.map(({ icon: Icon, label, value }, index) => (
             <div key={index} className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4">
-                <Icon className="w-6 h-6 text-blue-600" />
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-light rounded-lg mb-4">
+                <Icon className="w-6 h-6 text-blue" />
               </div>
-              <div className="text-3xl font-bold text-gray-900 mb-2">{value}</div>
-              <div className="text-sm text-gray-600">{label}</div>
+              <div className="text-3xl font-bold text-dominant mb-2">{value}</div>
+              <div className="text-sm text-slate">{label}</div>
             </div>
           ))}
         </div>
@@ -48,27 +48,27 @@ const Hero: React.FC = () => {
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="grid lg:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Shield className="w-8 h-8 text-blue-600" />
+              <div className="w-16 h-16 bg-light rounded-full flex items-center justify-center mx-auto mb-4">
+                <Shield className="w-8 h-8 text-blue" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Comprehensive Analysis</h3>
-              <p className="text-gray-600">Multi-layered security assessment covering network, data, personnel, and physical security</p>
+              <h3 className="text-lg font-semibold text-dominant mb-2">Comprehensive Analysis</h3>
+              <p className="text-slate">Multi-layered security assessment covering network, data, personnel, and physical security</p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <TrendingUp className="w-8 h-8 text-teal-600" />
+              <div className="w-16 h-16 bg-light rounded-full flex items-center justify-center mx-auto mb-4">
+                <TrendingUp className="w-8 h-8 text-teal" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Actionable Insights</h3>
-              <p className="text-gray-600">Receive prioritized recommendations and step-by-step remediation guides</p>
+              <h3 className="text-lg font-semibold text-dominant mb-2">Actionable Insights</h3>
+              <p className="text-slate">Receive prioritized recommendations and step-by-step remediation guides</p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Award className="w-8 h-8 text-purple-600" />
+              <div className="w-16 h-16 bg-light rounded-full flex items-center justify-center mx-auto mb-4">
+                <Award className="w-8 h-8 text-accent-green" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Compliance Ready</h3>
-              <p className="text-gray-600">Align with GDPR, HIPAA, SOX, PCI-DSS and other regulatory requirements</p>
+              <h3 className="text-lg font-semibold text-dominant mb-2">Compliance Ready</h3>
+              <p className="text-slate">Align with GDPR, HIPAA, SOX, PCI-DSS and other regulatory requirements</p>
             </div>
           </div>
         </div>

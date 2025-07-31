@@ -1,3 +1,52 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  /* Color Theme Variables */
+  --color-dominant: #1D4A51;
+  --color-dominant-rgb: 29, 74, 81;
+  --color-dominant-hsl: 188, 47%, 22%;
+  
+  --color-light: #DCDCD4;
+  --color-light-rgb: 220, 220, 212;
+  --color-light-hsl: 60, 10%, 85%;
+  
+  --color-accent-green: #43B98C;
+  --color-accent-green-rgb: 67, 185, 140;
+  --color-accent-green-hsl: 157, 47%, 49%;
+  
+  --color-teal: #329C8F;
+  --color-teal-rgb: 50, 156, 143;
+  --color-teal-hsl: 173, 51%, 40%;
+  
+  --color-blue: #139AAE;
+  --color-blue-rgb: 19, 154, 174;
+  --color-blue-hsl: 188, 80%, 38%;
+  
+  --color-slate: #57708D;
+  --color-slate-rgb: 87, 112, 141;
+  --color-slate-hsl: 212, 24%, 45%;
+}
+
+/* Utility classes for the color theme */
+.bg-dominant { background-color: var(--color-dominant); }
+.bg-light { background-color: var(--color-light); }
+.bg-accent-green { background-color: var(--color-accent-green); }
+.bg-teal { background-color: var(--color-teal); }
+.bg-blue { background-color: var(--color-blue); }
+.bg-slate { background-color: var(--color-slate); }
+
+.text-dominant { color: var(--color-dominant); }
+.text-light { color: var(--color-light); }
+.text-accent-green { color: var(--color-accent-green); }
+.text-teal { color: var(--color-teal); }
+.text-blue { color: var(--color-blue); }
+.text-slate { color: var(--color-slate); }
+
+.border-dominant { border-color: var(--color-dominant); }
+.border-light { border-color: var(--color-light); }
+.border-accent-green { border-color: var(--color-accent-green); }
+.border-teal { border-color: var(--color-teal); }
+.border-blue { border-color: var(--color-blue); }
+.border-slate { border-color: var(--color-slate); }

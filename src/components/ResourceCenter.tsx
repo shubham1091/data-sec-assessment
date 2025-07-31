@@ -134,21 +134,21 @@ const ResourceCenter: React.FC = () => {
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case 'guide': return 'bg-blue-100 text-blue-700';
-      case 'template': return 'bg-green-100 text-green-700';
-      case 'video': return 'bg-purple-100 text-purple-700';
-      case 'checklist': return 'bg-orange-100 text-orange-700';
-      case 'whitepaper': return 'bg-teal-100 text-teal-700';
-      default: return 'bg-gray-100 text-gray-700';
+      case 'guide': return 'bg-blue bg-opacity-20 text-blue';
+      case 'template': return 'bg-accent-green bg-opacity-20 text-accent-green';
+      case 'video': return 'bg-teal bg-opacity-20 text-teal';
+      case 'checklist': return 'bg-slate bg-opacity-20 text-slate';
+      case 'whitepaper': return 'bg-dominant bg-opacity-20 text-dominant';
+      default: return 'bg-light text-slate';
     }
   };
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'beginner': return 'bg-green-100 text-green-700';
-      case 'intermediate': return 'bg-yellow-100 text-yellow-700';
-      case 'advanced': return 'bg-red-100 text-red-700';
-      default: return 'bg-gray-100 text-gray-700';
+      case 'beginner': return 'bg-accent-green bg-opacity-20 text-accent-green';
+      case 'intermediate': return 'bg-slate bg-opacity-20 text-slate';
+      case 'advanced': return 'bg-dominant bg-opacity-20 text-dominant';
+      default: return 'bg-light text-slate';
     }
   };
 
@@ -165,8 +165,8 @@ const ResourceCenter: React.FC = () => {
     <div className="py-16 px-4 pb-24">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Security Resource Center</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-3xl font-bold text-dominant mb-4">Security Resource Center</h2>
+          <p className="text-lg text-slate max-w-3xl mx-auto">
             Access comprehensive guides, templates, and tools to strengthen your cybersecurity posture
           </p>
         </div>
@@ -176,23 +176,23 @@ const ResourceCenter: React.FC = () => {
           <div className="flex flex-col lg:flex-row gap-4">
             {/* Search */}
             <div className="flex-1 relative">
-              <Search className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+              <Search className="w-5 h-5 text-slate absolute left-3 top-1/2 transform -translate-y-1/2" />
               <input
                 type="text"
                 placeholder="Search resources..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 pr-4 py-3 border border-light rounded-lg focus:ring-2 focus:ring-blue focus:border-transparent"
               />
             </div>
 
             {/* Category Filter */}
             <div className="relative">
-              <Filter className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+              <Filter className="w-5 h-5 text-slate absolute left-3 top-1/2 transform -translate-y-1/2" />
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="pl-10 pr-8 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
+                className="pl-10 pr-8 py-3 border border-light rounded-lg focus:ring-2 focus:ring-blue focus:border-transparent appearance-none bg-white"
               >
                 {categories.map(category => (
                   <option key={category.id} value={category.id}>
@@ -207,7 +207,7 @@ const ResourceCenter: React.FC = () => {
               <select
                 value={selectedType}
                 onChange={(e) => setSelectedType(e.target.value)}
-                className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
+                className="px-4 py-3 border border-light rounded-lg focus:ring-2 focus:ring-blue focus:border-transparent appearance-none bg-white"
               >
                 {types.map(type => (
                   <option key={type.id} value={type.id}>
@@ -221,7 +221,7 @@ const ResourceCenter: React.FC = () => {
 
         {/* Results Count */}
         <div className="mb-6">
-          <p className="text-gray-600">
+          <p className="text-slate">
             Showing {filteredResources.length} of {resources.length} resources
           </p>
         </div>
@@ -245,16 +245,16 @@ const ResourceCenter: React.FC = () => {
                     </div>
                   </div>
                   
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  <h3 className="text-lg font-semibold text-dominant mb-2">
                     {resource.title}
                   </h3>
                   
-                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                  <p className="text-slate text-sm mb-4 leading-relaxed">
                     {resource.description}
                   </p>
                   
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2 text-sm text-gray-500">
+                    <div className="flex items-center space-x-2 text-sm text-slate">
                       <span className={`px-2 py-1 rounded-full text-xs ${getTypeColor(resource.type)}`}>
                         {resource.type}
                       </span>
@@ -263,7 +263,7 @@ const ResourceCenter: React.FC = () => {
                       )}
                     </div>
                     
-                    <button className="flex items-center space-x-1 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm">
+                    <button className="flex items-center space-x-1 px-3 py-1 bg-blue hover:bg-blue-700 text-white rounded-lg transition-colors text-sm">
                       {resource.downloadUrl ? (
                         <>
                           <Download size={14} />
@@ -284,37 +284,37 @@ const ResourceCenter: React.FC = () => {
         </div>
 
         {/* Featured Section */}
-        <div className="mt-16 bg-gradient-to-br from-blue-50 to-teal-50 rounded-2xl p-8">
+        <div className="mt-16 bg-gradient-to-br from-light to-light rounded-2xl p-8">
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Featured Resources</h3>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <h3 className="text-2xl font-bold text-dominant mb-4">Featured Resources</h3>
+            <p className="text-slate max-w-2xl mx-auto">
               Hand-picked resources to help you get started with cybersecurity best practices
             </p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-white rounded-lg p-6 text-center">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Shield className="w-6 h-6 text-blue-600" />
+              <div className="w-12 h-12 bg-light rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Shield className="w-6 h-6 text-blue" />
               </div>
-              <h4 className="font-semibold text-gray-900 mb-2">Security Fundamentals</h4>
-              <p className="text-sm text-gray-600">Essential security concepts every organization should implement</p>
+              <h4 className="font-semibold text-dominant mb-2">Security Fundamentals</h4>
+              <p className="text-sm text-slate">Essential security concepts every organization should implement</p>
             </div>
             
             <div className="bg-white rounded-lg p-6 text-center">
-              <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <FileText className="w-6 h-6 text-teal-600" />
+              <div className="w-12 h-12 bg-light rounded-lg flex items-center justify-center mx-auto mb-4">
+                <FileText className="w-6 h-6 text-teal" />
               </div>
-              <h4 className="font-semibold text-gray-900 mb-2">Compliance Templates</h4>
-              <p className="text-sm text-gray-600">Ready-to-use templates for major compliance frameworks</p>
+              <h4 className="font-semibold text-dominant mb-2">Compliance Templates</h4>
+              <p className="text-sm text-slate">Ready-to-use templates for major compliance frameworks</p>
             </div>
             
             <div className="bg-white rounded-lg p-6 text-center">
-              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Users className="w-6 h-6 text-purple-600" />
+              <div className="w-12 h-12 bg-light rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Users className="w-6 h-6 text-accent-green" />
               </div>
-              <h4 className="font-semibold text-gray-900 mb-2">Training Materials</h4>
-              <p className="text-sm text-gray-600">Comprehensive training programs for your security team</p>
+              <h4 className="font-semibold text-dominant mb-2">Training Materials</h4>
+              <p className="text-sm text-slate">Comprehensive training programs for your security team</p>
             </div>
           </div>
         </div>
