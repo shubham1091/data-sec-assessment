@@ -134,21 +134,31 @@ const ResourceCenter: React.FC = () => {
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case 'guide': return 'bg-blue bg-opacity-20 text-blue';
-      case 'template': return 'bg-accent-green bg-opacity-20 text-accent-green';
-      case 'video': return 'bg-teal bg-opacity-20 text-teal';
-      case 'checklist': return 'bg-slate bg-opacity-20 text-slate';
-      case 'whitepaper': return 'bg-dominant bg-opacity-20 text-dominant';
-      default: return 'bg-light text-slate';
+      case "guide":
+        return "bg-blue bg-opacity-20 text-white";
+      case "template":
+        return "bg-accent-green bg-opacity-20 text-white";
+      case "video":
+        return "bg-teal bg-opacity-20 text-white";
+      case "checklist":
+        return "bg-slate bg-opacity-20 text-white";
+      case "whitepaper":
+        return "bg-dominant bg-opacity-20 text-white";
+      default:
+        return "bg-light text-white";
     }
   };
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'beginner': return 'bg-accent-green bg-opacity-20 text-accent-green';
-      case 'intermediate': return 'bg-slate bg-opacity-20 text-slate';
-      case 'advanced': return 'bg-dominant bg-opacity-20 text-dominant';
-      default: return 'bg-light text-slate';
+      case "beginner":
+        return "bg-accent-green bg-opacity-20 text-white";
+      case "intermediate":
+        return "bg-slate bg-opacity-20 text-white";
+      case "advanced":
+        return "bg-dominant bg-opacity-20 text-white";
+      default:
+        return "bg-light text-white";
     }
   };
 

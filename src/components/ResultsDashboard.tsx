@@ -1,6 +1,24 @@
 import React from 'react';
-import { TrendingUp, AlertTriangle, Target, LucideIcon } from 'lucide-react';
-import { AssessmentResult } from '../App';
+import { TrendingUp, Target, LucideIcon } from "lucide-react";
+import { AssessmentResult } from "../App";
+import { Pie, Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+} from "chart.js";
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement
+);
 
 interface ResultsDashboardProps {
   results: AssessmentResult[];
@@ -41,43 +59,124 @@ const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
     <div className="py-16 px-4 pb-24">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-dominant mb-4">Your Security Results</h2>
+          <h2 className="text-3xl font-bold text-dominant mb-4">
+            Your Security Results
+          </h2>
           <p className="text-lg text-slate">
-            Here's how you're doing with security practices and what you can improve
+            Here's how you're doing with security practices and what you can
+            improve
           </p>
         </div>
-
-        {/* Overall Score */}
+        {/* Overall Score & Charts */}
         <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue to-teal rounded-full mb-4">
-              <span className="text-2xl font-bold text-white">
+              <span className="text-2xl font-bold">
                 {Math.round(averageScore * 100)}
               </span>
             </div>
-            <h3 className="text-2xl font-bold text-dominant mb-2">Overall Security Score</h3>
-            <div className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full ${
-              overallRisk === 'low' ? 'bg-accent-green bg-opacity-20 text-accent-green' :
-              overallRisk === 'medium' ? 'bg-slate bg-opacity-20 text-slate' :
-              overallRisk === 'high' ? 'bg-blue bg-opacity-20 text-blue' :
-              'bg-dominant bg-opacity-20 text-dominant'
-            }`}>
+            <h3 className="text-2xl font-bold text-dominant mb-2">
+              Overall Security Score
+            </h3>
+            <div
+              className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full ${
+                overallRisk === "low"
+                  ? "bg-accent-green bg-opacity-20"
+                  : overallRisk === "medium"
+                  ? "bg-slate bg-opacity-20"
+                  : overallRisk === "high"
+                  ? "bg-blue bg-opacity-20"
+                  : "bg-dominant bg-opacity-20"
+              }`}
+            >
               {React.createElement(getRiskIcon(overallRisk), { size: 16 })}
               <span className="font-medium capitalize">
-                {overallRisk === 'low' ? 'Great Job!' : 
-                 overallRisk === 'medium' ? 'Good Progress' :
-                 overallRisk === 'high' ? 'Needs Attention' : 'Action Required'}
+                {overallRisk === "low"
+                  ? "Great Job!"
+                  : overallRisk === "medium"
+                  ? "Good Progress"
+                  : overallRisk === "high"
+                  ? "Needs Attention"
+                  : "Action Required"}
               </span>
             </div>
           </div>
+          {/* Charts Section */}
+          <div className="grid md:grid-cols-2 gap-8 mb-8">
+            {/* Pie Chart: Risk Distribution */}
+            <div className="bg-light rounded-xl p-4 flex flex-col items-center">
+              <h4 className="text-lg font-semibold text-dominant mb-2">
+                Risk Distribution
+              </h4>
+              <Pie
+                data={{
+                  labels: ["Low", "Medium", "High", "Critical"],
+                  datasets: [
+                    {
+                      data: [
+                        results.filter((r) => r.riskLevel === "low").length,
+                        results.filter((r) => r.riskLevel === "medium").length,
+                        results.filter((r) => r.riskLevel === "high").length,
+                        results.filter((r) => r.riskLevel === "critical")
+                          .length,
+                      ],
+                      backgroundColor: [
+                        "#22c55e", // green
+                        "#64748b", // slate
+                        "#2563eb", // blue
+                        "#1e293b", // dominant
+                      ],
+                      borderWidth: 1,
+                    },
+                  ],
+                }}
+              />
+            </div>
+            {/* Bar Chart: Category Scores */}
+            <div className="bg-light rounded-xl p-4 flex flex-col items-center">
+              <h4 className="text-lg font-semibold text-dominant mb-2">
+                Category Scores
+              </h4>
+              <Bar
+                data={{
+                  labels: results.map((r) => r.category),
+                  datasets: [
+                    {
+                      label: "Score (%)",
+                      data: results.map((r) =>
+                        Math.round((r.score / r.maxScore) * 100)
+                      ),
+                      backgroundColor: "#2563eb",
+                    },
+                  ],
+                }}
+                options={{
+                  scales: {
+                    y: {
+                      beginAtZero: true,
+                      max: 100,
+                    },
+                  },
+                }}
+              />
+            </div>
+          </div>
 
-          <div className="grid md:grid-cols-4 gap-6">
-            {Object.entries(riskCounts).map(([risk, count]) => (
-              <div key={risk} className="text-center p-4 bg-light rounded-lg">
-                <div className={`text-2xl font-bold mb-1 ${getRiskColor(risk)}`}>
-                  {count}
+          {/* Show all four risk areas below the chart */}
+          <div className="grid md:grid-cols-4 gap-6 mt-4">
+            {["low", "medium", "high", "critical"].map((risk) => (
+              <div
+                key={risk}
+                className="text-center p-4 bg-light rounded-lg"
+              >
+                <div
+                  className={`text-2xl font-bold mb-1 ${getRiskColor(risk)}`}
+                >
+                  {riskCounts[risk] || 0}
                 </div>
-                <div className="text-sm text-slate capitalize">{risk} Risk Areas</div>
+                <div className="text-sm text-slate capitalize">
+                  {risk.charAt(0).toUpperCase() + risk.slice(1)} Risk Areas
+                </div>
               </div>
             ))}
           </div>
@@ -87,48 +186,74 @@ const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
         <div className="grid lg:grid-cols-2 gap-6 mb-8">
           {results.map((result, index) => {
             const RiskIcon = getRiskIcon(result.riskLevel);
-            const percentage = Math.round((result.score / result.maxScore) * 100);
-            
+            const percentage = Math.round(
+              (result.score / result.maxScore) * 100
+            );
+
             return (
-              <div key={index} className="bg-white rounded-xl shadow-lg p-6">
+              <div
+                key={index}
+                className="bg-white rounded-xl shadow-lg p-6"
+              >
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-semibold text-dominant">{result.category}</h3>
-                  <div className={`flex items-center space-x-1 ${getRiskColor(result.riskLevel)}`}>
+                  <h3 className="text-xl font-semibold text-dominant">
+                    {result.category}
+                  </h3>
+                  <div
+                    className={`flex items-center space-x-1 ${getRiskColor(
+                      result.riskLevel
+                    )}`}
+                  >
                     <RiskIcon size={16} />
-                    <span className="text-sm font-medium capitalize">{result.riskLevel}</span>
+                    <span className="text-sm font-medium capitalize">
+                      {result.riskLevel}
+                    </span>
                   </div>
                 </div>
-                
+
                 <div className="mb-4">
                   <div className="flex justify-between text-sm text-slate mb-2">
-                    <span>Score: {result.score}/{result.maxScore}</span>
+                    <span>
+                      Score: {result.score}/{result.maxScore}
+                    </span>
                     <span>{percentage}%</span>
                   </div>
                   <div className="w-full bg-light rounded-full h-3">
-                    <div 
+                    <div
                       className={`h-3 rounded-full transition-all duration-500 ${
-                        result.riskLevel === 'low' ? 'bg-accent-green' :
-                        result.riskLevel === 'medium' ? 'bg-slate' :
-                        result.riskLevel === 'high' ? 'bg-blue' :
-                        'bg-dominant'
+                        result.riskLevel === "low"
+                          ? "bg-accent-green"
+                          : result.riskLevel === "medium"
+                          ? "bg-slate"
+                          : result.riskLevel === "high"
+                          ? "bg-blue"
+                          : "bg-dominant"
                       }`}
                       style={{ width: `${percentage}%` }}
                     ></div>
                   </div>
                 </div>
-                
+
                 <div>
-                  <h4 className="text-sm font-semibold text-dominant mb-2">Key Recommendations:</h4>
+                  <h4 className="text-sm font-semibold text-dominant mb-2">
+                    Key Recommendations:
+                  </h4>
                   <ul className="space-y-1">
                     {result.recommendations.slice(0, 3).map((rec, i) => (
-                      <li key={i} className="text-sm text-slate flex items-start space-x-2">
-                        <Target size={12} className="mt-1 text-blue flex-shrink-0" />
+                      <li
+                        key={i}
+                        className="text-sm text-slate flex items-start space-x-2"
+                      >
+                        <Target
+                          size={12}
+                          className="mt-1 text-blue flex-shrink-0"
+                        />
                         <span>{rec}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-                
+
                 <div className="mt-4 pt-4 border-t border-light">
                   <div className="text-xs text-slate">
                     Completed: {result.completedAt.toLocaleDateString()}
@@ -140,52 +265,16 @@ const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
         </div>
 
         {/* Action Items */}
-        <div className="bg-gradient-to-r from-light to-light rounded-2xl p-8">
-          <div className="flex items-center space-x-3 mb-6">
-            <div className="w-10 h-10 bg-blue rounded-lg flex items-center justify-center">
-              <AlertTriangle className="w-5 h-5 text-white" />
-            </div>
-            <h3 className="text-2xl font-bold text-dominant">What You Can Do Next</h3>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white rounded-lg p-6">
-              <h4 className="font-semibold text-dominant mb-3">This Week</h4>
-              <ul className="space-y-2 text-sm text-slate">
-                <li className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-dominant rounded-full"></div>
-                  <span>Set up two-factor authentication on key accounts</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-dominant rounded-full"></div>
-                  <span>Update passwords that are weak or reused</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-dominant rounded-full"></div>
-                  <span>Talk to IT about any security questions</span>
-                </li>
-              </ul>
-            </div>
-            
-            <div className="bg-white rounded-lg p-6">
-              <h4 className="font-semibold text-dominant mb-3">This Month</h4>
-              <ul className="space-y-2 text-sm text-slate">
-                <li className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-slate rounded-full"></div>
-                  <span>Attend the next security training session</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-slate rounded-full"></div>
-                  <span>Review and organize your digital workspace</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-slate rounded-full"></div>
-                  <span>Share security tips with your teammates</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      </div>
+      {/* Download PDF Button */}
+      <div className="flex justify-center mt-12 mb-4">
+        <button
+          className="px-8 py-4 bg-dominant text-white rounded-xl shadow-lg text-xl font-bold hover:bg-blue transition-colors border-2 border-blue"
+          style={{ fontFamily: "serif", letterSpacing: "0.03em" }}
+          onClick={() => window.print()}
+        >
+          Download Business Report (PDF)
+        </button>
       </div>
     </div>
   );
