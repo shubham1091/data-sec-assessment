@@ -10,116 +10,12 @@ import {
   Search,
   Filter
 } from 'lucide-react';
-
-interface Resource {
-  id: string;
-  title: string;
-  description: string;
-  type: 'guide' | 'template' | 'video' | 'checklist' | 'whitepaper';
-  category: 'network' | 'data' | 'compliance' | 'training' | 'incident-response';
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
-  duration?: string;
-  downloadUrl?: string;
-}
+import { resources, categories, types } from '../data/resourcesData';
 
 const ResourceCenter: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedType, setSelectedType] = useState<string>('all');
-
-  const resources: Resource[] = [
-    {
-      id: '1',
-      title: 'Network Security Fundamentals',
-      description: 'Comprehensive guide covering firewall configuration, network monitoring, and intrusion detection systems.',
-      type: 'guide',
-      category: 'network',
-      difficulty: 'beginner',
-      duration: '30 min read'
-    },
-    {
-      id: '2',
-      title: 'Data Encryption Best Practices',
-      description: 'Step-by-step implementation guide for encrypting data at rest and in transit across different platforms.',
-      type: 'guide',
-      category: 'data',
-      difficulty: 'intermediate',
-      duration: '45 min read'
-    },
-    {
-      id: '3',
-      title: 'GDPR Compliance Checklist',
-      description: 'Complete checklist for ensuring GDPR compliance with actionable items and deadlines.',
-      type: 'checklist',
-      category: 'compliance',
-      difficulty: 'intermediate',
-      downloadUrl: '#'
-    },
-    {
-      id: '4',
-      title: 'Incident Response Plan Template',
-      description: 'Ready-to-use template for creating comprehensive incident response procedures.',
-      type: 'template',
-      category: 'incident-response',
-      difficulty: 'intermediate',
-      downloadUrl: '#'
-    },
-    {
-      id: '5',
-      title: 'Security Awareness Training Program',
-      description: 'Complete training curriculum for building security awareness across all organizational levels.',
-      type: 'video',
-      category: 'training',
-      difficulty: 'beginner',
-      duration: '2 hours'
-    },
-    {
-      id: '6',
-      title: 'Zero Trust Architecture Whitepaper',
-      description: 'In-depth analysis of zero trust principles and implementation strategies for modern organizations.',
-      type: 'whitepaper',
-      category: 'network',
-      difficulty: 'advanced',
-      duration: '60 min read',
-      downloadUrl: '#'
-    },
-    {
-      id: '7',
-      title: 'Data Loss Prevention Strategy',
-      description: 'Comprehensive strategy guide for implementing effective data loss prevention controls.',
-      type: 'guide',
-      category: 'data',
-      difficulty: 'advanced',
-      duration: '40 min read'
-    },
-    {
-      id: '8',
-      title: 'ISO 27001 Implementation Checklist',
-      description: 'Step-by-step checklist for implementing ISO 27001 information security management system.',
-      type: 'checklist',
-      category: 'compliance',
-      difficulty: 'advanced',
-      downloadUrl: '#'
-    }
-  ];
-
-  const categories = [
-    { id: 'all', label: 'All Categories', icon: Shield },
-    { id: 'network', label: 'Network Security', icon: Shield },
-    { id: 'data', label: 'Data Protection', icon: FileText },
-    { id: 'compliance', label: 'Compliance', icon: BookOpen },
-    { id: 'training', label: 'Training', icon: Users },
-    { id: 'incident-response', label: 'Incident Response', icon: Shield }
-  ];
-
-  const types = [
-    { id: 'all', label: 'All Types' },
-    { id: 'guide', label: 'Guides' },
-    { id: 'template', label: 'Templates' },
-    { id: 'checklist', label: 'Checklists' },
-    { id: 'video', label: 'Videos' },
-    { id: 'whitepaper', label: 'Whitepapers' }
-  ];
 
   const getTypeIcon = (type: string) => {
     switch (type) {
@@ -273,19 +169,22 @@ const ResourceCenter: React.FC = () => {
                       )}
                     </div>
                     
-                    <button className="flex items-center space-x-1 px-3 py-1 bg-blue hover:bg-blue-700 text-white rounded-lg transition-colors text-sm">
-                      {resource.downloadUrl ? (
-                        <>
-                          <Download size={14} />
-                          <span>Download</span>
-                        </>
-                      ) : (
-                        <>
-                          <ExternalLink size={14} />
-                          <span>View</span>
-                        </>
-                      )}
-                    </button>
+                    {resource.downloadUrl ? (
+                      <a 
+                        href={resource.downloadUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center space-x-1 px-3 py-1 bg-blue hover:bg-blue-700 text-white rounded-lg transition-colors text-sm"
+                      >
+                        <ExternalLink size={14} />
+                        <span>View Resource</span>
+                      </a>
+                    ) : (
+                      <button className="flex items-center space-x-1 px-3 py-1 bg-slate hover:bg-slate-700 text-white rounded-lg transition-colors text-sm cursor-not-allowed" disabled>
+                        <FileText size={14} />
+                        <span>Coming Soon</span>
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

@@ -15,6 +15,13 @@ export interface AssessmentResult {
   recommendations: string[];
   completedAt: Date;
   answers: { id: number; answer: boolean }[];
+  userDetails?: {
+    name: string;
+    email: string;
+    role: string;
+    department: string;
+    company: string;
+  };
 }
 
 interface Question {
@@ -35,6 +42,13 @@ interface Category {
 function App() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [results, setResults] = useState<AssessmentResult[]>([]);
+  const [userDetails, setUserDetails] = useState<{
+    name: string;
+    email: string;
+    role: string;
+    department: string;
+    company: string;
+  } | null>(null);
   const [activeTab, setActiveTab] = useState<
     "assessments" | "results" | "resources"
   >("assessments");
@@ -302,9 +316,15 @@ function App() {
           results={results}
           getRiskColor={getRiskColor}
           getRiskIcon={getRiskIcon}
+          userDetails={userDetails || {
+            name: "N/A",
+            email: "N/A",
+            role: "N/A",
+            department: "N/A",
+            company: "N/A"
+          }}
         />
       )}
-
       {activeTab === "resources" && <ResourceCenter />}
 
       {/* Navigation Tabs */}
@@ -339,8 +359,9 @@ function App() {
         <SingleAssessmentModal
           categories={assessmentCategories}
           onClose={() => setActiveModal(null)}
-          onComplete={(results) => {
+          onComplete={(results, userDetailsFromAssessment) => {
             setResults(results);
+            setUserDetails(userDetailsFromAssessment);
             setActiveTab("results");
             setActiveModal(null);
           }}

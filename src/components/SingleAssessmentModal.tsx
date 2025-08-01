@@ -18,6 +18,9 @@ interface Category {
 interface UserDetails {
   name: string;
   email: string;
+  role: string;
+  department: string;
+  company: string;
 }
 
 interface AssessmentResult {
@@ -42,7 +45,13 @@ const SingleAssessmentModal: React.FC<Props> = ({ categories, onClose, onComplet
   );
 
   const [step, setStep] = useState<'user' | 'question' | 'done'>('user');
-  const [userDetails, setUserDetails] = useState<UserDetails>({ name: '', email: '' });
+  const [userDetails, setUserDetails] = useState<UserDetails>({
+    name: "",
+    email: "",
+    role: "",
+    department: "",
+    company: "",
+  });
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<{ id: number; answer: boolean; category: string }[]>([]);
 
@@ -111,12 +120,16 @@ const SingleAssessmentModal: React.FC<Props> = ({ categories, onClose, onComplet
     return (
       <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
         <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-md">
-          <h2 className="text-2xl font-bold text-dominant mb-4 text-center">Start Assessment</h2>
-          <p className="text-slate mb-6 text-center">Please enter your details to begin the assessment.</p>
+          <h2 className="text-2xl font-bold text-dominant mb-4 text-center">
+            Start Assessment
+          </h2>
+          <p className="text-slate mb-6 text-center">
+            Please enter your details to begin the assessment.
+          </p>
           <form
-            onSubmit={e => {
+            onSubmit={(e) => {
               e.preventDefault();
-              setStep('question');
+              setStep("question");
             }}
             className="space-y-4"
           >
@@ -125,7 +138,9 @@ const SingleAssessmentModal: React.FC<Props> = ({ categories, onClose, onComplet
               required
               placeholder="Your Name"
               value={userDetails.name}
-              onChange={e => setUserDetails({ ...userDetails, name: e.target.value })}
+              onChange={(e) =>
+                setUserDetails({ ...userDetails, name: e.target.value })
+              }
               className="w-full px-4 py-2 border border-light rounded-lg"
             />
             <input
@@ -133,12 +148,55 @@ const SingleAssessmentModal: React.FC<Props> = ({ categories, onClose, onComplet
               required
               placeholder="Your Email"
               value={userDetails.email}
-              onChange={e => setUserDetails({ ...userDetails, email: e.target.value })}
+              onChange={(e) =>
+                setUserDetails({ ...userDetails, email: e.target.value })
+              }
+              className="w-full px-4 py-2 border border-light rounded-lg"
+            />
+            <input
+              type="text"
+              required
+              placeholder="Your Role"
+              value={userDetails.role}
+              onChange={(e) =>
+                setUserDetails({ ...userDetails, role: e.target.value })
+              }
+              className="w-full px-4 py-2 border border-light rounded-lg"
+            />
+            <input
+              type="text"
+              required
+              placeholder="Department"
+              value={userDetails.department}
+              onChange={(e) =>
+                setUserDetails({ ...userDetails, department: e.target.value })
+              }
+              className="w-full px-4 py-2 border border-light rounded-lg"
+            />
+            <input
+              type="text"
+              required
+              placeholder="Company"
+              value={userDetails.company}
+              onChange={(e) =>
+                setUserDetails({ ...userDetails, company: e.target.value })
+              }
               className="w-full px-4 py-2 border border-light rounded-lg"
             />
             <div className="flex justify-between mt-6">
-              <button type="button" className="px-4 py-2 text-slate" onClick={onClose}>Cancel</button>
-              <button type="submit" className="px-6 py-2 bg-blue text-white rounded-lg font-semibold">Start</button>
+              <button
+                type="button"
+                className="px-4 py-2 text-slate"
+                onClick={onClose}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="px-6 py-2 bg-blue text-white rounded-lg font-semibold"
+              >
+                Start
+              </button>
             </div>
           </form>
         </div>
