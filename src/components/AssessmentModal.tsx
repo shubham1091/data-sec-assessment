@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { X, CheckCircle, AlertTriangle, LucideIcon } from 'lucide-react';
+import { CheckCircle, X, AlertTriangle, LucideIcon } from 'lucide-react';
+import { generateSpecificRecommendation } from '../data/recommendationsData';
 import { AssessmentResult } from '../App';
 
 interface Question {
@@ -77,42 +78,29 @@ const AssessmentModal: React.FC<AssessmentModalProps> = ({
   };
 
   const generateRecommendations = (answers: Record<number, boolean>, questions: Question[], riskLevel: string): string[] => {
-    const failedQuestions = questions.filter(q => !answers[q.id]);
     const recommendations: string[] = [];
     
-    if (riskLevel === 'critical' || riskLevel === 'high') {
-      recommendations.push('Talk to your IT team or manager about security concerns within the next week');
-      recommendations.push('Set up two-factor authentication on all your work accounts');
-      recommendations.push('Attend the next available security training session');
-    }
-    
-    failedQuestions.forEach(question => {
-      if (question.text.includes('VPN') || question.text.includes('WiFi')) {
-        recommendations.push('Ask IT how to properly use the company VPN and avoid public WiFi for work');
-      }
-      if (question.text.includes('password') || question.text.includes('authentication')) {
-        recommendations.push('Use a password manager and enable two-factor authentication where possible');
-      }
-      if (question.text.includes('phishing') || question.text.includes('suspicious')) {
-        recommendations.push('Learn to identify phishing emails and always verify suspicious requests');
-      }
-      if (question.text.includes('backup') || question.text.includes('files')) {
-        recommendations.push('Regularly save important work files to approved company systems');
-      }
-      if (question.text.includes('lock') || question.text.includes('secure')) {
-        recommendations.push('Always lock your screen and secure devices when stepping away');
-      }
-      if (question.text.includes('data') || question.text.includes('information')) {
-        recommendations.push('Only access and share information that you need for your specific job role');
+    // Generate specific recommendations for each question
+    questions.forEach(question => {
+      const answer = answers[question.id];
+      if (answer !== undefined) {
+        const recommendation = generateSpecificRecommendation(question.text, answer);
+        recommendations.push(recommendation);
       }
     });
     
-    if (recommendations.length === 0) {
-      recommendations.push('Great job! Keep up these excellent security habits');
-      recommendations.push('Consider helping colleagues learn about security best practices');
+    // Add general recommendations based on risk level
+    if (riskLevel === 'critical') {
+      recommendations.push('CRITICAL: Schedule immediate security review with IT team. Your current practices put you and your organization at significant risk.');
+    } else if (riskLevel === 'high') {
+      recommendations.push('HIGH PRIORITY: Address security gaps within the next week. Consider additional security training.');
+    } else if (riskLevel === 'medium') {
+      recommendations.push('GOOD PROGRESS: You\'re on the right track! Focus on addressing the remaining security gaps.');
+    } else {
+      recommendations.push('EXCELLENT: You\'re following security best practices. Keep up the great work and help others do the same.');
     }
     
-    return recommendations.slice(0, 5);
+    return recommendations.slice(0, 6); // Show up to 6 recommendations
   };
 
   const progress = ((currentQuestion + 1) / category.questions.length) * 100;

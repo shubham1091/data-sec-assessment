@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { generateSpecificRecommendation } from '../data/recommendationsData';
 
 interface Question {
   id: number;
@@ -82,13 +83,9 @@ const SingleAssessmentModal: React.FC<Props> = ({ categories, onClose, onComplet
     return 'critical';
   };
 
-  // Generate recommendations based on answers
+  // Generate recommendations based on answers using the comprehensive recommendation system
   function getRecommendation(questionText: string, answer: boolean): string {
-    if (answer) {
-      return `Good job: "${questionText}". Keep following this best practice!`;
-    } else {
-      return `Consider improving: "${questionText}". Here's how you can do better.`;
-    }
+    return generateSpecificRecommendation(questionText, answer);
   }
 
   const results: AssessmentResult[] = Object.entries(grouped).map(([category, { score, maxScore, answers }]) => {
