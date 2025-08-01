@@ -68,7 +68,8 @@ const AssessmentModal: React.FC<AssessmentModalProps> = ({
       maxScore,
       riskLevel,
       recommendations,
-      completedAt: new Date()
+      completedAt: new Date(),
+      answers: Object.entries(answers).map(([id, answer]) => ({ id: parseInt(id), answer }))
     };
     
     setShowResults(true);
