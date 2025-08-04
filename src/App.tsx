@@ -49,13 +49,6 @@ const getIconComponent = (iconName: string) => {
 function App() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [results, setResults] = useState<AssessmentResult[]>([]);
-  const [userDetails, setUserDetails] = useState<{
-    name: string;
-    email: string;
-    role: string;
-    department: string;
-    company: string;
-  } | null>(null);
   const [activeTab, setActiveTab] = useState<
     "assessments" | "results" | "resources"
   >("assessments");
@@ -128,13 +121,6 @@ function App() {
           results={results}
           getRiskColor={getRiskColor}
           getRiskIcon={getRiskIcon}
-          userDetails={userDetails || {
-            name: "N/A",
-            email: "N/A",
-            role: "N/A",
-            department: "N/A",
-            company: "N/A"
-          }}
         />
       )}
       {activeTab === "resources" && <ResourceCenter />}
@@ -171,9 +157,8 @@ function App() {
         <SingleAssessmentModal
           categories={assessmentCategories}
           onClose={() => setActiveModal(null)}
-          onComplete={(results, userDetailsFromAssessment) => {
+          onComplete={(results) => {
             setResults(results);
-            setUserDetails(userDetailsFromAssessment);
             setActiveTab("results");
             setActiveModal(null);
           }}
