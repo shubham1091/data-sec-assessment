@@ -9,7 +9,7 @@ export interface Resource {
   downloadUrl?: string;
 }
 
-export const resources:Resource[] =[
+export const resources:Resource[] = [
   // Whitepapers and Strategic Documents
   {
     id: 'uk-national-data-strategy',
@@ -100,8 +100,7 @@ export const resources:Resource[] =[
     type: 'guide',
     category: 'compliance',
     difficulty: 'intermediate',
-    duration: '40 minutes',
-    downloadUrl: 'https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/subject-access-requests/'
+    duration: '40 minutes'
   },
   {
     id: 'cross-border-data-transfers',
@@ -110,8 +109,7 @@ export const resources:Resource[] =[
     type: 'guide',
     category: 'compliance',
     difficulty: 'advanced',
-    duration: '45 minutes',
-    downloadUrl: 'https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/international-transfers/international-transfers-a-guide/'
+    duration: '45 minutes'
   },
   {
     id: 'data-minimisation-guide',
@@ -120,8 +118,7 @@ export const resources:Resource[] =[
     type: 'guide',
     category: 'data',
     difficulty: 'intermediate',
-    duration: '35 minutes',
-    downloadUrl: 'https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/'
+    duration: '35 minutes'
   },
 
   // Training Videos
@@ -207,7 +204,87 @@ export const resources:Resource[] =[
     duration: '35 minutes',
     downloadUrl: 'https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-sharing/data-sharing-a-code-of-practice/data-sharing-agreements/'
   },
-
+  {
+    id: 'data-breach-response-plan',
+    title: 'Data Breach Response Plan Template',
+    description: 'Comprehensive incident response plan template for data breaches under UK GDPR. Includes 72-hour notification procedures, impact assessments, and stakeholder communication.',
+    type: 'template',
+    category: 'incident-response',
+    difficulty: 'intermediate',
+    duration: '40 minutes'
+  },
+  {
+    id: 'data-governance-policy-template',
+    title: 'Organizational Data Governance Policy Template',
+    description: 'Template for creating comprehensive data governance policies covering data ownership, stewardship, classification, retention, and access controls.',
+    type: 'template',
+    category: 'data',
+    difficulty: 'intermediate',
+    duration: '50 minutes'
+  },
+  {
+    id: 'privacy-by-design-framework',
+    title: 'Privacy by Design Implementation Template',
+    description: 'Framework template for embedding privacy considerations into data processing systems and procedures from the design stage, ensuring UK GDPR compliance.',
+    type: 'template',
+    category: 'data',
+    difficulty: 'advanced',
+    duration: '55 minutes'
+  },
+  {
+    id: 'data-retention-schedule-template',
+    title: 'Data Retention Schedule Template',
+    description: 'Template for creating comprehensive data retention schedules covering different data types, legal requirements, and secure disposal procedures.',
+    type: 'template',
+    category: 'data',
+    difficulty: 'beginner',
+    duration: '25 minutes'
+  },
+  {
+    id: 'data-quality-framework',
+    title: 'Data Quality Management Framework Template',
+    description: 'Comprehensive template for establishing data quality standards, measurement processes, and improvement strategies. Aligned with UK government data standards.',
+    type: 'template',
+    category: 'data',
+    difficulty: 'intermediate',
+    duration: '45 minutes'
+  },
+  {
+    id: 'third-party-data-governance',
+    title: 'Third-Party Data Sharing Governance Template',
+    description: 'Framework template for governing data sharing with third parties including vendor assessments, contractual requirements, and ongoing monitoring procedures.',
+    type: 'template',
+    category: 'data',
+    difficulty: 'advanced',
+    duration: '50 minutes'
+  },
+  {
+    id: 'data-lifecycle-management',
+    title: 'Data Lifecycle Management Framework Template',
+    description: 'End-to-end template for managing data throughout its lifecycle from creation to disposal, ensuring compliance and value optimization at each stage.',
+    type: 'template',
+    category: 'data',
+    difficulty: 'intermediate',
+    duration: '55 minutes'
+  },
+  {
+    id: 'gdpr-compliance-assessment',
+    title: 'UK GDPR Compliance Self-Assessment Template',
+    description: 'Self-assessment template for evaluating UK GDPR compliance across all data processing activities. Includes gap analysis and remediation planning.',
+    type: 'template',
+    category: 'compliance',
+    difficulty: 'intermediate',
+    duration: '60 minutes'
+  },
+  {
+    id: 'data-monitoring-framework',
+    title: 'Data Governance Monitoring and Assurance Template',
+    description: 'Template for continuous monitoring of data governance effectiveness including KPIs, audit procedures, and compliance reporting mechanisms.',
+    type: 'template',
+    category: 'data',
+    difficulty: 'advanced',
+    duration: '45 minutes'
+  },
 
   // Checklists
   {
@@ -220,8 +297,62 @@ export const resources:Resource[] =[
     duration: '15 minutes',
     downloadUrl: 'https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-sharing/data-sharing-a-code-of-practice/annex-a-data-sharing-checklist/'
   },
-
+  {
+    id: 'data-breach-response-checklist',
+    title: 'Data Breach Response Checklist - ICO Aligned',
+    description: 'Immediate response checklist for data breaches under UK GDPR. Includes notification requirements, containment procedures, and documentation requirements.',
+    type: 'checklist',
+    category: 'incident-response',
+    difficulty: 'beginner',
+    duration: '15 minutes'
+  },
+  {
+    id: 'data-governance-audit-checklist',
+    title: 'Data Governance Audit Checklist',
+    description: 'Comprehensive audit checklist covering all aspects of data governance compliance including policies, procedures, controls, and documentation requirements.',
+    type: 'checklist',
+    category: 'compliance',
+    difficulty: 'intermediate',
+    duration: '35 minutes'
+  },
+  {
+    id: 'data-classification-checklist',
+    title: 'Data Classification and Handling Checklist',
+    description: 'Checklist for classifying data based on sensitivity levels with corresponding handling, storage, and sharing requirements aligned with UK GDPR.',
+    type: 'checklist',
+    category: 'data',
+    difficulty: 'beginner',
+    duration: '20 minutes'
+  },
+  {
+    id: 'privacy-impact-checklist',
+    title: 'Privacy Impact Assessment Checklist',
+    description: 'Step-by-step checklist for conducting privacy impact assessments, including risk identification, mitigation measures, and stakeholder consultation.',
+    type: 'checklist',
+    category: 'compliance',
+    difficulty: 'intermediate',
+    duration: '25 minutes'
+  },
+  {
+    id: 'data-governance-implementation-checklist',
+    title: 'Data Governance Implementation Checklist',
+    description: 'Comprehensive checklist for implementing data governance programs covering strategy, structure, processes, and technology considerations.',
+    type: 'checklist',
+    category: 'data',
+    difficulty: 'intermediate',
+    duration: '30 minutes'
+  },
+  {
+    id: 'gdpr-readiness-checklist',
+    title: 'UK GDPR Readiness Checklist',
+    description: 'Complete readiness checklist for UK GDPR compliance covering all key requirements including lawful basis, data subjects rights, and accountability measures.',
+    type: 'checklist',
+    category: 'compliance',
+    difficulty: 'beginner',
+    duration: '40 minutes'
+  }
 ];
+
 
 export const categories = [
   { id: 'all', label: 'All Categories' },
